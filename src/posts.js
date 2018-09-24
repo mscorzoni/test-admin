@@ -1,10 +1,15 @@
 import React from 'react';
 import { List, Edit, Create, Datagrid, ReferenceField, TextField, 
          EditButton, DisabledInput, LongTextInput, ReferenceInput, 
-         SelectInput, SimpleForm, TextInput, Filter } from 'react-admin';
+         SelectInput, SimpleForm, TextInput, Filter, SimpleList } from 'react-admin';
 
 const PostFilter = (props) => (
     <Filter {...props}>
+      <SimpleList
+          primaryText={record => record.title}
+          secondaryText={record => `${record.views} views`}
+          tertiaryText={record => new Date(record.published_at).toLocaleDateString()}
+         />
       <TextInput label="Search" source="q" alwaysOn />
       <ReferenceInput label="User" source="userId" reference="users" allowEmpty>
         <SelectInput optionText="name" />
